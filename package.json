@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.6"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Unity Server",
+  "main": "server.js",
+  "author": "Sergiosoba",
+  "license": "ISC"
+}
