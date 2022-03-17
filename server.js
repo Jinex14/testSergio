@@ -1,6 +1,13 @@
 var express = require("express");
+const bodyParser = require('body-parser');
+const User = require('./user');
+var mongoose = require('mongoose');
+
 
 var app = express();
+app.use(bodyParser.json());
+
+mongoose.connect(process.env.MONGO_URL || 'mongodb+srv://sergiosoba:Q1oUW7NajEZkvjJQ@cluster0.0dwxx.mongodb.net/pollocampero', {useNewUrlParser: true});
 
 app.get("/", (req, res) => {
     res.send("Hello World");
@@ -18,6 +25,18 @@ app.get("/user/:id", (req, res) => {
     res.json(dummyData);
     //res.send(dummyData.username);
 })
+
+app.post('/user', async (req, res) => {
+    let user = User(req.body);
+    try {
+        const nuevoUsuario = await user.save();
+        return res.status(201).json({
+            mensajes: "ok"
+        });
+    } catch (error) {
+        return res.status(500);
+    }
+});
 
 app.listen(process.env.PORT || 5555, () => {
     console.log("Server has started!");
